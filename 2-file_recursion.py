@@ -24,7 +24,7 @@ def _find_files_function(suffix, path, list_files):
         if os.path.isdir(updated_file_path):
             _find_files_function(suffix, updated_file_path, list_files)
         else:
-            if updated_file_path.endswith('.c'):
+            if updated_file_path.endswith(suffix):
                 list_files.append(files)
     return list_files
 
@@ -36,4 +36,7 @@ print(find_files('.c', 'testdir'))
 print(find_files('.a', 'empty'))
 
 ## Test Case 3
-print(find_files('.a', 'testdir'))
+print(find_files('.h', 'testdir'))
+
+## Test Case 3
+print(find_files('.z', 'testdir'))

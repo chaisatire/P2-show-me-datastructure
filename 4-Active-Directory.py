@@ -57,15 +57,22 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
+
+    # First checking if group exists. If it doesn't exist then inform user about it.
+    try:
+        group.get_users()
+    except:
+        return "The given group object doesn't exist\n"
+
     # Checking for the user in the group in question:
     if check_if_user_exists(user, group):
-        return True
+        return 'The user {} exists in group {}'.format(user, group.name)
 
     # Check Groups and the user inside those groups:
     if check_inside_group(user, group):
-        return True
+        return 'The user {} exists in group {}'.format(user, group.name)
 
-    return False
+    return 'User {} does not exist in group {}'.format(user, group.name)
 
 
 parent = Group("parent")
@@ -80,23 +87,24 @@ parent.add_group(child)
 
 parent.add_user('kris')
 
-
 ## Test Case 1
 
 our_user = sub_child_user
 our_group = parent
 
-if is_user_in_group(our_user, our_group):
-    print('The user {} exists in group {}'.format(our_user, our_group.name))
-else:
-    print('User {} does not exist in group {}'.format(our_user, our_group.name))
+print(is_user_in_group(our_user, our_group))
+print('\n')
 
 ## Test Case 2
 
 our_user = 'kris'
 our_group = child
 
-if is_user_in_group(our_user, our_group):
-    print('The user {} exists in group {}'.format(our_user, our_group.name))
-else:
-    print('User {} does not exist in group {}'.format(our_user, our_group.name))
+print(is_user_in_group(our_user, our_group))
+print('\n')
+
+## Test Case 3
+
+our_user = 'kris'
+our_group = 'grandparent'
+print(is_user_in_group(our_user, our_group))

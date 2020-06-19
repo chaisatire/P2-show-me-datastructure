@@ -70,7 +70,10 @@ def union(llist_1, llist_2):
     union_list = LinkedList()
     for elements in union_set:
         union_list.append(elements)
-    return 'The union of provided linked lists is: {}'.format(union_list)
+    if union_list.head is None:
+        return 'Both the lists provided are empty'
+    else:
+        return 'The union of provided linked lists is: {}'.format(union_list)
 
 
 def intersection(llist_1, llist_2):
@@ -136,6 +139,24 @@ linked_list_4 = LinkedList()
 
 element_1 = []
 element_2 = [1,7,8,9,11,21,1]
+
+for i in element_1:
+    linked_list_3.append(i)
+
+for i in element_2:
+    linked_list_4.append(i)
+
+print (union(linked_list_3,linked_list_4))
+print (intersection(linked_list_3,linked_list_4))
+print("\n\n")
+
+# Test case 4
+
+linked_list_3 = LinkedList()
+linked_list_4 = LinkedList()
+
+element_1 = []
+element_2 = []
 
 for i in element_1:
     linked_list_3.append(i)

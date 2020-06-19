@@ -35,7 +35,9 @@ class Blockchain:
     def __init__(self, ):
         self.head = None
 
-    def insert(self, data):
+    def insert(self, data=None):
+        assert data is not None
+
         if self.head is None:
             self.head = Block(data, 0)
             return
@@ -47,7 +49,35 @@ class Blockchain:
         node.next = Block(data, prev_hash)
 
 
+## Test Case 1
 block = Blockchain()
-block.insert('First Block Data')
-block.insert('Second Block Data')
-block.insert('Third Block Data')
+
+try:
+    block.insert('First Block Data')
+except TypeError:
+    print("Multiple values provided. Please provide 1 value to insert\n")
+except AssertionError:
+    print("No value is provided to add. Please provide 1 value to insert.\n")
+
+try:
+    block.insert('Second Block Data')
+except TypeError:
+    print("Multiple values provided. Please provide 1 value to insert\n")
+except AssertionError:
+    print("No value is provided to add. Please provide 1 value to insert.\n")
+
+## Test Case 2 - No value to append
+try:
+    block.insert()
+except TypeError:
+    print("Multiple values provided. Please provide 1 value to insert\n")
+except AssertionError:
+    print("No value is provided to add. Please provide 1 value to insert.\n")
+
+# Test case 3 - Too many values:
+try:
+    block.insert('data1', 'data2', 'data3')
+except TypeError:
+    print("Multiple values provided. Please provide 1 value to insert\n")
+except AssertionError:
+    print("No value is provided to add. Please provide 1 value to insert.\n")

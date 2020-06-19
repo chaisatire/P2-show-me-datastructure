@@ -17,6 +17,11 @@ class LRU_Cache(object):
         return self.cache_map[key][0]
 
     def set(self, key, value):
+
+        if key is None:
+            print('Provided key is None, Please provide a valid key.')
+            return
+
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
         if key in self.cache_map:
             # Move the existing key to the right of dictionary.
@@ -46,6 +51,7 @@ class LRU_Cache(object):
             # Deleting the first entry which was never used
             if self.cache_map[key][1] == 0:
                 del self.cache_map[key]
+                self.num_elements -= 1
                 return
             dict_values.append(self.cache_map[key][1])
 
@@ -55,6 +61,7 @@ class LRU_Cache(object):
         for key in self.cache_map:
             if self.cache_map[key][1] == min_value:
                 del self.cache_map[key]
+                self.num_elements -= 1
                 return
 
 
@@ -73,7 +80,20 @@ q = our_cache.get(9)      # returns -1 because 9 is not present in the cache
 our_cache.set(5, 5)
 print(our_cache.cache_map)
 our_cache.set(6, 6)
+print('\n')
 
 # Test Case 2
 our_cache.get(3) # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
+print(our_cache.cache_map)
+print('\n')
+
+# Test case 3
+our_cache.set(0, 0)
+our_cache.get(4) # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
+print(our_cache.cache_map)
+print('\n')
+
+# Test case 4 - For adding None as key, the cache should not change.
+
+our_cache.set(None, None)
 print(our_cache.cache_map)
