@@ -51,6 +51,9 @@ def huffman_encoding(data):
        6. Second is the general case when there are multiple characters.
        7. We call a recursive function "make_codes" to generate codes.
        8. In the end encoded_data is created from the coes generated.
+
+       For code generation logic and joining the nodes logic,
+       I took help to understand logic from already posted questions in knowledge@Udacity
     """
     # Return None of empty data
     if len(data) == 0:
@@ -70,7 +73,10 @@ def huffman_encoding(data):
 
     heapq.heapify(my_heap)
 
-    """ Start Creating HuffMan's Tree """
+    """ 
+        Start Creating HuffMan's Tree 
+
+    """
     # Edge condition when there is only 1 character
     if len(my_heap) == 1:
         root = Node(None, 1)
